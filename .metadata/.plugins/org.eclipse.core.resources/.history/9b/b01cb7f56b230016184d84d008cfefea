@@ -1,0 +1,158 @@
+package deepCopy;
+import java.util.*;
+public class main {
+
+	public static void main(String[] args) {
+		// TODO Auto-generated method stub
+			System.out.println("Hello");
+		List ListA = new LinkedList();
+		List ListB = new LinkedList();
+		ListA.add(24);
+		ListA.add(25);
+		ListA.add(27);
+		ListA.add(29);
+		
+		//To see if it copied correctly
+		for(int x=0; x<ListA.size();x++)
+		{
+			System.out.println("Index " + x + " is: " + ListA.get(x));
+		}
+		
+		//Perform a Deep Copy
+		for(int x=0; x<ListA.size();x++)
+		{
+			ListB.add(x,ListA.get(x));
+		}
+		ListA.remove(1);
+		//List B is not effected by a delete of an item form ListA
+		for(int x=0; x<ListB.size();x++)
+		{
+			System.out.println("Index " + x + " is: " + ListB.get(x));
+		}
+		
+		
+		
+		//Second way to do this
+		Node head = new Node(5,null,null);
+		Node head2 = new Node();
+		
+		//Adding things to the first LinkedList
+		Node adder = new Node();
+		adder = head;
+		for(int x=0; x<10; x++)
+		{
+			Node new1 = new Node();
+			adder.setNext(new1);
+			adder.setValue(2*x+1);
+			adder = adder.getNext();
+		}
+			
+		/*Node reader = new Node();
+		reader.setValue(head.getValue());
+		reader.setNext(head.getNext());
+		
+		while(reader.getNext() != null)
+		{
+			System.out.println("Value!!: " + reader.getValue());
+			reader.setValue(reader.getNext().getValue());
+			reader.setNext(reader.getNext().getNext());
+		}	
+		/*Node temp = new Node(head.getValue(),head.getNext(),head.getRandom());
+		Node temp2 = new Node();*/
+
+		//Copy Method
+		/*while(temp.getNext() !=null)
+		{
+			
+			Node new2 = new Node(temp.getValue(), temp.getNext(), temp.getRandom());
+			//System.out.println(temp2.getValue());
+			if(temp == head){
+				head2 = new2;
+				temp2 = head2;				
+			}
+			else
+			{
+				temp.setValue(temp.getNext().getValue());
+				temp.setNext(temp.getNext().getNext());
+				temp.setRandom(temp.getNext().getRandom());
+			}
+			
+		}*/
+		
+		
+		//Actual Deep Copy Code
+		Node iter = new Node();
+		iter = head;
+		int counter =0;
+		Node ptr = new Node();
+		while(iter!=null)
+		{
+			Node new2 = new Node();
+			if(counter ==0)
+			{
+				head2 = new2;
+				ptr = head2;
+				ptr.setValue(head.getValue()+1);
+				ptr.setRandom(head.getRandom());
+				ptr.setNext(null);
+			}
+			else
+			{
+				ptr.setNext(new2);
+				ptr = ptr.getNext();
+				ptr.setValue(iter.getValue()+1);
+				ptr.setRandom(iter.getRandom());
+				ptr.setNext(null);
+			}
+			counter++;
+			iter = iter.getNext();
+		}
+		
+		//System.out.println(counter);
+		//System.out.println("Head Val: " + head2.getValue());
+		
+		
+		Node reader2 = new Node();
+		reader2 = head2;
+		Node reader1 = new Node();
+		reader1 = head;
+		
+		//Printing the values from the different arrays at the same time.
+		while(reader2.getNext() != null)
+		{
+			System.out.println("Value from old Array: " + reader1.getValue());
+			System.out.println("Value from new Array: " + reader2.getValue());
+			reader2 = reader2.getNext();
+			reader1 = reader1.getNext();
+		}
+	}
+}
+
+class Node{
+	private int value;
+	private Node next;
+	private Node random;
+	
+	public Node()
+	{
+		
+	}
+	public Node(int v, Node n, Node r)
+	{
+		value = v;
+		next = n;
+		random = r;
+	}
+	
+	//Public Set Functions
+	public void setValue(int v)	{	value =v;	}
+	public void setNext(Node n)	{	next = n;	}
+	public void setRandom(Node r){	random = r;	}
+	
+	//Public set Functions
+	public int getValue()	{	return value;	}
+	public Node getNext()	{	return next;	}
+	public Node getRandom()	{	return random;	}
+	
+	
+}

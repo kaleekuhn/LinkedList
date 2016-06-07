@@ -1,0 +1,33 @@
+package deepCopy;
+import java.util.*;
+public class main {
+
+	public static void main(String[] args) {
+		// TODO Auto-generated method stub
+			System.out.println("Hello");
+		List ListA = new LinkedList();
+		List ListB = new LinkedList();
+		ListA.add(24);
+		ListA.add(25);
+		ListA.add(27);
+		ListA.add(29);
+		
+		//To see if it copied correctly
+		for(int x=0; x<ListA.size();x++)
+		{
+			System.out.println("Index " + x + " is: " + ListA.get(x));
+		}
+		
+		//Perform a Deep Copy
+		for(int x=0; x<ListA.size();x++)
+		{
+			ListB.add(x,ListA.get(x));
+		}
+		ListA.remove(1);
+		for(int x=0; x<ListB.size();x++)
+		{
+			System.out.println("Index " + x + " is: " + ListB.get(x));
+		}
+	}
+
+}

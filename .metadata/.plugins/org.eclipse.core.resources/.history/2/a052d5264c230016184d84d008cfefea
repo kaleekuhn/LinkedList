@@ -1,0 +1,18 @@
+package deepCopy;
+import java.util.*;
+public class main {
+
+	public static void main(String[] args) {
+		// TODO Auto-generated method stub
+			System.out.println("Hello");
+		List ListA = new LinkedList();
+		ListA.add(24);
+		
+		for(int x=0; x<ListA.size();x++)
+		{
+			System.out.println("Index " + x + " is: " + ListA.get(x));
+		}
+			
+	}
+
+}
